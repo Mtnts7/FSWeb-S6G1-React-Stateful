@@ -15,11 +15,11 @@ Ancak burada sadece bir state gereklidir: sayici!
 Diğer şeyler basitçe sayımın kendisinden türetilebilir.
 
 ADIM 0:
-  Aşağıdaki bileşeni inceleyerek ve state hookunu import ederek başlayın.
+  Aşağıdaki bileşeni inceleyerek ve state hookunu import ederek başlayın. ++
 
 ADIM 1:
   State hookunu kullanara, bir 'sayici', 'setSayici' çifti oluşturun.
-  'sayici' state'inin ilk değeri 0 olarak yüklenmelidir.
+  'sayici' state'inin ilk değeri 0 olarak yüklenmelidir. ++
 
 ADIM 2:
   'stil' nesnesinde 'color' niteliği sabit olarak "royalblue" olarak belirlenmiştir.
@@ -45,32 +45,33 @@ ADIM 6:
 	Bu click handler 'sayici' yı sıfırlamak için 'setSayici' yi kullanacak.
 */
 
-import React from 'react'; /* ADIM 0 buraya*/
+import React,{useState} from 'react'; /* ADIM 0 buraya*/
 
 export default function Sayac() {
-  /* ADIM 1 buraya*/
+  const[sayici,setSayici] = useState(0);
 	
 	
   const artirici = () => {
-    /* ADIM 4 buraya */
+    setSayici(sayici + 1);
   };
   const azaltici = () => {
-    /* ADIM 5 */
+    setSayici (sayici - 1);
   };
   const reset = () => {
+    setSayici(0);
   };
 
   const stil = {
     fontSize: '1.5em',
     marginBottom: '0.3em',
-    color: 'royalblue', /* ADIM 2 */
+    color: sayici%2==0 ? 'royalblue' :'crimson ', /* ADIM 2 */
   };
 
   return (
     <div className='widget-counter container'>
       <h2>Sayaç</h2>
-      <div id='sayici' style={stil}>
-        Sayı {sayici} {/* ADIM 3  buraya*/ }
+      <div id='sayici' style={stil}>            
+        Sayı {sayici} {sayici%2==0 ? 'çift':'tek'}
       </div>
       <div>
         <button id='artirici' onClick={artirici}>Artırıcı</button>

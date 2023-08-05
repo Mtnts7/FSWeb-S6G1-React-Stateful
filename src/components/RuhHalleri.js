@@ -10,7 +10,7 @@ Bazıları 3 adet olduğunu söyleyecektir: her ruh hali için bir (mutlu, üzg�
 Fakat tek bir state dilimi bu durumları saklamak için yeterlidir!
 
 ADIM 0:
-  Aşağıdaki bileşeni inceleyin ve state hook'u import edin.
+  Aşağıdaki bileşeni inceleyin ve state hook'u import edin. ++
 
 ADIM 1:
   State hook'u kullanarak bir 'ruhHali' ve 'setRuhHali' oluşturun.
@@ -27,36 +27,36 @@ ADIM 4, 5, 6:
   Click handler içinde `setRuhHali` ni kulanarak aşağıda tanımlanmış değişkenleri kullanarak ruhHali'ni güncelleyin
 */
 
-import React from 'react'; /* ADIM 0 */
+import React,{useState} from 'react'; /* ADIM 0 */
 
 const ilkRuhHali = 'Nasıl hissettiğimi bilmiyorum :-|';
 const mutluRuhHali = 'Oldukça mutlu :)';
 const uzgunRuhHali = 'Oldukça üzgün :(';
 
 export default function RuhHalleri() {
-  /* ADIM 1 */
+  const [ruhHali , setRuhHali] = useState(ilkRuhHali)
 	
 	
   const mutluEt = () => {
-    /* ADIM 4 */
+    setRuhHali(mutluRuhHali);
   };
   const uZ = () => {
-    /* ADIM 5 */
+    setRuhHali(uzgunRuhHali);
   };
   const reset = () => {
-    /* ADIM 6 */
+    setRuhHali(ilkRuhHali);
   };
 
   const stil = {
     fontSize: '1.5em',
     marginBottom: '0.3em',
-    color: 'royalblue', /* ADIM 2 */
+    color: ruhHali == mutluRuhHali ? 'royalblue' :'crimson'
   };
 
   return (
     <div className='widget-moods container'>
       <h2>RuhHalleri</h2>
-	<div id='ruhHali' style={stil}>'Nasıl hissettiğimi bilmiyorum :-|'</div> {/* ADIM 3 */}
+	<div id='ruhHali' style={stil}>{ruhHali}</div> 
       <div>
         <button id='mutluEt' onClick={mutluEt}>Mutlu Et</button>
         <button id='uz' onClick={uZ}>Üz</button>
